@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PhotoService } from '../services/photo.service';
 @Component({
   selector: 'app-tab2',
@@ -6,9 +6,12 @@ import { PhotoService } from '../services/photo.service';
   styleUrls: ['tab2.page.scss'],
   standalone: false,
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
+  async ngOnInit() {
+    await this.photoService.loadSaved();
+  }
   constructor(public photoService: PhotoService) {}
-  addPhotoToGallery() {
-    this.photoService.addNewToGallery();
+  async addPhotoToGallery() {
+    await this.photoService.addNewToGallery();
   }
 }
